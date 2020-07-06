@@ -1,0 +1,28 @@
+.container {
+	width: 100vw;
+	height: 60px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	color: var(--font);
+	background-color: var(--main-bg);
+	z-index: 100;
+}
+
+.wrapper {
+	padding: 0rem 10rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+}
+
+.logo {
+	font-size: 40px;
+}
+
+@media (max-width: 798px) {
+	.wrapper {
+		padding: 0 1.3rem;
+	}
+}
