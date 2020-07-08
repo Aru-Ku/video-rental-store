@@ -1,0 +1,105 @@
+.conatiner {
+	width: 100%;
+	height: 100%;
+	background-color: var(--main-bg);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.box {
+	width: 35%;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+	.box {
+		width: 90%;
+	}
+}
+
+.boxOpen {
+	animation: down 1s cubic-bezier(0, 1, 1, 1);
+	animation-iteration-count: 1;
+}
+
+@keyframes down {
+	from {
+		transform: translateY(-50%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0%);
+		opacity: 1;
+	}
+}
+
+.boxClose {
+	animation: up 1.2s cubic-bezier(0, 1, 1, 1);
+	animation-iteration-count: 1;
+}
+
+@keyframes up {
+	from {
+		transform: translateY(0%);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+}
+
+.loginWindow {
+	width: 100vw;
+	color: var(--font);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.head {
+	text-align: center;
+	font-size: 1.3rem;
+	padding: 15px 0 10px 0;
+	color: var(--font);
+}
+.link {
+	text-align: center;
+	font-size: 0.9rem;
+	color: var(--font);
+}
+.link span {
+	text-decoration: underline;
+	cursor: pointer;
+	background: var(--main-bg);
+	color: var(--font);
+	border: none;
+	font-size: 1rem;
+	letter-spacing: 1px;
+}
+
+.button {
+	width: 100%;
+	background: var(--font);
+	color: var(--main-bg);
+	padding: 0;
+	outline: none;
+	font-size: 20px;
+	color: var(--main-bg);
+	border: none;
+	margin-top: 15px;
+	cursor: pointer;
+	padding: 10px;
+	box-sizing: border-box;
+	display: block;
+	position: relative;
+}
+.button div {
+	position: absolute;
+	top: 8%;
+	right: 5%;
+	width: 30px;
+	height: 30px;
+}

@@ -1,14 +1,14 @@
 .container {
-	width: 100vw;
-	/* margin-top: 60px; */
-	height: calc(100vh);
+	width: 100%;
+	height: 100vh;
 	background: var(--main-bg);
 	color: var(--font);
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 }
 
 .wrapper {
-	height: 100%;
+	width: 100%;
+	height: 100vh;
 	display: flex;
 	z-index: 10;
 }
@@ -17,38 +17,37 @@
 	z-index: 10;
 	padding: 0rem 7rem;
 	background: radial-gradient(circle at 70vw, #ffffff00, var(--main-bg) 55%, var(--main-bg) 75%, var(--main-bg) 100%);
-	/* height: 100%; */
 	width: 100%;
 }
 
 .head {
-	font-size: 50px;
+	font-size: 2.1rem;
 	box-sizing: border-box;
-	margin: 100px 0;
+	margin: 120px 0;
 	animation: head 1s cubic-bezier(0, 1, 1, 1);
 	animation-iteration-count: 1;
 }
 
 .points > p:nth-child(1) {
-	font-size: 20px;
+	font-size: 1rem;
 	padding-left: 15px;
 	animation: point 1s cubic-bezier(0, 0.5, 0.5, 1);
 	animation-iteration-count: 1;
 }
 .points > p:nth-child(2) {
-	font-size: 20px;
+	font-size: 1rem;
 	padding-left: 25px;
 	animation: point 1.4s cubic-bezier(0, 0.5, 0.5, 1);
 	animation-iteration-count: 1;
 }
 .points > p:nth-child(3) {
-	font-size: 20px;
+	font-size: 1rem;
 	padding-left: 35px;
 	animation: point 1.8s cubic-bezier(0, 0.5, 0.5, 1);
 	animation-iteration-count: 1;
 }
 .points > p:nth-child(4) {
-	font-size: 20px;
+	font-size: 1rem;
 	padding-left: 45px;
 	animation: point 2.2s cubic-bezier(0, 0.5, 0.5, 1);
 	animation-iteration-count: 1;
@@ -61,6 +60,13 @@
 }
 .points > p:last-child::before {
 	content: "";
+}
+
+.hoem {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline;
 }
 
 .hoem1,
@@ -76,17 +82,18 @@
 
 .hoem1,
 .hoem3 {
+	/* transform: translateX(5%); */
 	animation: hoem-left 2s cubic-bezier(0, 0.3, 0.3, 1);
 }
 .hoem2,
 .hoem4 {
-	transform: translateX(15%);
-	animation: hoem-right 2s cubic-bezier(0, 0.3, 0.3, 1);
+	/* transform: translateX(15%); */
+	animation: hoem-left 2.4s cubic-bezier(0, 0.3, 0.3, 1);
 }
 
 @keyframes point {
 	from {
-		transform: translateX(-15%);
+		-webkit-transform: translateY(-15%);
 	}
 	to {
 		transform: translateX(0%);
@@ -113,16 +120,7 @@
 	}
 }
 
-@keyframes hoem-right {
-	from {
-		transform: translateX(80%);
-	}
-	to {
-		transform: translateX(15%);
-	}
-}
-
-.loginConatiner {
+.loginButton {
 	margin-top: 45px;
 	width: 15%;
 	height: 100px;
@@ -130,7 +128,6 @@
 	padding-left: 45px;
 	flex-direction: column;
 	align-items: center;
-	/* transform: translateX(15%); */
 	animation: login 0.5s linear;
 }
 
@@ -143,11 +140,11 @@
 	}
 }
 
-.loginConatiner button {
+.loginButton button {
 	box-sizing: border-box;
 	width: 100%;
 	height: 55px;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 	font-weight: 600;
 	color: var(--main-bg);
@@ -155,25 +152,25 @@
 	border: #ffffff00;
 	outline: none;
 	cursor: pointer;
-	box-shadow: 0px 0px 10px #000;
+	box-shadow: 0px 0px 10px var(--font);
 }
 
-.loginConatiner button:after {
-	content: "LOGIN / SIGNUP";
+.loginButton button:after {
+	content: "LOGIN /\00a0SIGNUP";
 }
 
-.loginConatiner div {
+.loginButton div {
 	position: relative;
 	transform: translateY(-100%);
 	transition: all 0.3s ease-in;
 	opacity: 0;
 }
 
-.loginConatiner:hover button:after {
+.loginButton:hover button:after {
 	content: "LOGIN";
 }
 
-.loginConatiner:hover div {
+.loginButton:hover div {
 	display: inline;
 	transform: translateY(0%);
 	opacity: 1;
@@ -182,14 +179,56 @@
 	font-size: 18px;
 }
 
-.loginConatiner span {
+.loginButton span {
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-.switchThemeWrapper {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	z-index: 50;
+@media (max-width: 1024px) {
+	.content {
+		padding: 0rem 1rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.hoem1,
+	.hoem2,
+	.hoem4 {
+		display: none;
+	}
+	.hoem3 {
+		animation: hoem-right 7s cubic-bezier(0.01, 0.42, 0.6, 1.35);
+		transform: translateX(65%);
+	}
+	@keyframes hoem-right {
+		from {
+			transform: translateX(-40%);
+		}
+		to {
+			transform: translateX(65%);
+		}
+	}
+	.head {
+		margin: 270px 0 45px 0;
+	}
+	.content {
+		padding: 0rem 1rem;
+		background: linear-gradient(#ffffff00, var(--main-bg));
+	}
+	.loginButton {
+		width: 80%;
+		animation: none;
+	}
+	.loginButton button:after {
+		content: "LOGIN";
+	}
+	.loginButton:hover button:after {
+		content: "LOGIN";
+	}
+	.loginButton div {
+		position: relative;
+		bottom: -8px;
+		opacity: 1;
+		transform: none;
+	}
 }

@@ -1,0 +1,161 @@
+.container {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	margin-top: 60px;
+	top: 0;
+	left: 0;
+}
+
+.dashboard {
+	padding: 0rem 10rem;
+	height: 100%;
+	transition: padding 0.2s linear;
+}
+
+.searchBox {
+	width: 100%;
+	height: 35px;
+	position: relative;
+	margin-bottom: 15px;
+}
+.searchBox::after {
+	font-family: "FontAwesome";
+	content: "\f002";
+	position: absolute;
+	top: 25%;
+	right: 5px;
+}
+.searchBoxSpan {
+	margin-top: 0;
+}
+.searchBoxInput {
+	padding-top: 0.5rem;
+}
+.searchBoxInput::placeholder {
+	color: var(--font);
+	opacity: 1;
+}
+
+.moviesWrapper {
+	background: var(--input-bg);
+	height: 100%;
+	padding: 0.6rem;
+	transition: padding 0.2s linear;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	position: relative;
+	box-shadow: inset 0 5px 5px var(--depth-sh);
+}
+
+.movieFlex {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-content: flex-start;
+}
+.movieFlex:last-child {
+	margin-bottom: 100px;
+}
+.movieFlex div:empty {
+	height: 10px;
+	width: calc(95% / 2);
+}
+
+.movieData {
+	width: calc(95% / 2);
+	display: grid;
+	grid-template-columns: 110px 100%;
+	background-color: var(--main-bg);
+	position: relative;
+	margin: 10px 5px;
+	box-shadow: 1px 1px 5px rgb(121, 121, 121);
+}
+.thumbnail {
+	width: 110px;
+}
+
+.movieContent {
+	padding: 5px 0 0 10px;
+	width: 100%;
+}
+.movieContent div:nth-child(1) {
+	font-size: 1.1rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	width: 60%;
+	margin: 0.2rem 0 0.4em 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.movieContent div:nth-child(2) {
+	font-size: 0.8rem;
+	font-style: italic;
+}
+.movieContent div:nth-child(3) {
+	white-space: nowrap;
+	font-weight: 500;
+	font-size: 0.9rem;
+	text-overflow: ellipsis;
+}
+.movieContent a {
+	color: var(--links);
+	margin: 0 10px 0 0;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+.movieContent a:after {
+	content: " \f08e";
+}
+.movieContent button {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+.movieContent img {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 20px;
+}
+
+@media (max-width: 769px) {
+	.dashboard {
+		padding: 0rem 1.3rem;
+		transition: padding 0.1s linear;
+	}
+	.moviesWrapper {
+		margin: 15px 0;
+		transition: all 0.1s linear;
+		padding: 0.6rem;
+	}
+	.movieFlex:last-child {
+		margin-bottom: 100px;
+	}
+	.movieData {
+		width: 100%;
+		margin: 5px 0;
+	}
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+	.dashboard {
+		padding: 0rem 3rem;
+		transition: padding 0.1s linear;
+	}
+	.movieData {
+		width: calc(95% / 2);
+		margin: 5px 0;
+	}
+	.movieFlex:last-child {
+		margin-bottom: 100px;
+	}
+	.moviesWrapper {
+		margin: 15px 0;
+		transition: all 0.1s linear;
+		padding: 0.6rem;
+	}
+}

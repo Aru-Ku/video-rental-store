@@ -1,0 +1,163 @@
+/** INPUT Styles */
+
+.wrapper {
+	position: relative;
+	display: block;
+	clear: both;
+	margin-top: 10px;
+}
+
+.input {
+	display: block;
+	-webkit-transition: border-color;
+	-moz-transition: border-color;
+	transition: border-color;
+	box-sizing: border-box;
+	background-color: var(--main-bg);
+	color: var(--font);
+	border-width: 0;
+	border-bottom: 2px solid var(--font);
+	font-size: 1em;
+	padding: 2em 0.5em 0.5em 0.1em;
+	width: 100%;
+	outline: none;
+}
+
+.label {
+	-webkit-transform: translateY(50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(50%);
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	font-size: 1em;
+	position: absolute;
+	top: 27%;
+	left: 0em;
+	background: none;
+	color: var(--font);
+	pointer-events: none;
+}
+
+.input:focus ~ .label,
+.hascontent ~ .label {
+	top: -10%;
+	font-size: 0.9em;
+	padding: 0 0.3em;
+	color: var(--font);
+	background: var(--main-bg);
+}
+
+.warning {
+	text-align: left;
+	margin: 3px 0 0 10px;
+	color: red;
+	font-size: 0.8rem;
+	font-weight: 400;
+}
+
+.inputBorderRed {
+	border-bottom: 2px solid red;
+}
+
+.inputBorderGreen {
+	border-bottom: 2px solid rgb(6, 192, 6);
+}
+
+@media (min-width: 769px) {
+	.label {
+		top: 20%;
+	}
+}
+
+/** SWITCH THEME */
+
+.StBox {
+	width: 60px;
+	height: 30px;
+	background: var(--main-bg);
+	border: 1px solid var(--font);
+	border-radius: 20px;
+}
+
+.StCircle {
+	margin: 5% 0 0 5%;
+	width: 40%;
+	height: 80%;
+	border-radius: 50%;
+	box-shadow: 0 4px 4px rgba(26, 53, 71, 0.25), 0 0 0 1px rgba(26, 53, 71, 0.07);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	-webkit-transition: all 0.4s cubic-bezier(0.54, 1.6, 0.5, 1);
+	transition: all 0.4s cubic-bezier(0.54, 1.6, 0.5, 1);
+	cursor: pointer;
+	background-image: url("../Assets/sun.png");
+}
+
+.StCircleMoon {
+	background-image: url("../Assets/moon.png");
+	margin-left: 55%;
+	transition: margin-left 0.2s linear;
+}
+
+.StCircleSun {
+	background-image: url("../Assets/sun.png");
+	transition: margin-left 0.2s linear;
+}
+
+/** Spinner */
+
+.circle1,
+.circle2 {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: var(--main-bg);
+	opacity: 0.6;
+	-webkit-animation: bounce 2s infinite ease-in-out;
+	animation: bounce 2s infinite ease-in-out;
+}
+
+.circle2 {
+	-webkit-animation-delay: -1s;
+	animation-delay: -1s;
+}
+
+@-webkit-keyframes bounce {
+	0%,
+	100% {
+		-webkit-transform: scale(0.2);
+	}
+
+	50% {
+		-webkit-transform: scale(1);
+	}
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: scale(0.2);
+		-webkit-transform: scale(0.2);
+	}
+
+	50% {
+		transform: scale(1);
+		-webkit-transform: scale(1);
+	}
+}
+
+/** BACKDROP */
+
+.backdrop {
+	width: 100vh;
+	height: 100vh;
+	position: relative;
+	top: 0;
+	left: 0;
+	background-color: #00000088;
+	z-index: 50;
+}

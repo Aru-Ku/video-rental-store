@@ -11,18 +11,125 @@
 
 .wrapper {
 	padding: 0rem 10rem;
+	transition: padding 0.1s linear;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	height: 100%;
 }
 
+.backdrop {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(116, 116, 116, 0.397);
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 50;
+	transition: opacity 0.4s linear;
+	opacity: 0;
+}
+
 .logo {
 	font-size: 40px;
 }
 
-@media (max-width: 798px) {
+.link {
+	color: var(--font);
+	text-decoration: none;
+}
+
+.cart {
+	padding: 0 10px;
+}
+
+.navs {
+	width: 200px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.selector {
+	display: none;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+	.wrapper {
+		padding: 0 3rem;
+		transition: padding 0.2s linear;
+	}
+}
+
+@media (max-width: 769px) {
 	.wrapper {
 		padding: 0 1.3rem;
+		transition: padding 0.1s linear;
+	}
+	.backdrop.show {
+		opacity: 1;
+		transition: opacity 0.3s linear;
+		display: block;
+	}
+	.navs {
+		width: 100%;
+		height: auto;
+		opacity: 0;
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 60px;
+		right: 0;
+		z-index: 80;
+		background-color: var(--main-bg);
+		text-align: center;
+		border-bottom: 1px solid var(--font);
+		font-size: 1.15rem;
+		z-index: 70;
+		transform: translateY(-150%);
+		transition: all 0.3s linear;
+	}
+	.navs.show {
+		opacity: 1;
+		transform: translateY(0%);
+		transition: all 0.3s linear;
+	}
+	.navs div:nth-child(1),
+	.navs div:nth-child(2) {
+		margin: 20px 0 20px 0;
+	}
+	.selector {
+		display: block;
+		width: 50px;
+		height: 50px;
+		position: relative;
+		cursor: pointer;
+		z-index: 100;
+	}
+	.selector::after,
+	.selector::before {
+		width: 1.3rem;
+		height: 3px;
+		content: "";
+		background-color: var(--font);
+		transition: all 0.2s linear;
+		position: absolute;
+		top: 50%;
+	}
+	.selector::before {
+		transform: rotate(45deg);
+		border-radius: 0 0 50% 0;
+		left: 15%;
+	}
+	.selector::after {
+		transform: rotate(135deg);
+		border-radius: 0 50% 0 0;
+		right: 15%;
+	}
+	.selector.animate::after,
+	.selector.animate::before {
+		width: 2.1rem;
+		border-radius: 30%;
+		transition: all 0.2s linear;
 	}
 }
