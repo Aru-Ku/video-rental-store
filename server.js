@@ -9,7 +9,7 @@ const db = require("./app/models");
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.get("/", (req, res) => res.send("VRS"));
+
 // ROUTES
 require("./app/routes/auth")(app);
 require("./app/routes/movies")(app);
