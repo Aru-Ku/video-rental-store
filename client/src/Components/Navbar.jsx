@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "../Styles/Navbar.module.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
 	const btnRef = React.useRef();
 	const menuRef = React.useRef();
 	const backdropRef = React.useRef();
+	const history = useHistory();
 
 	const handlers = {
 		toggleMenu() {
@@ -21,16 +22,26 @@ const Navbar = () => {
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
 					<div className={styles.logo}>
-						<Link to='/' className={styles.link}>
+						<div to='/' className={styles.link} onClick={() => history.push("/")}>
 							VRS
-						</Link>
+						</div>
 					</div>
 					<div style={{ flexGrow: 1 }} />
-					<div className={styles.cart}>CART</div>
+					<div className={styles.cart}>
+						<div to='/cart' className='cart-icon' data-cartcount='0' onClick={() => history.push("/cart")}>
+							CART <span />
+						</div>
+					</div>
 					<div ref={btnRef} className={styles.selector} onClick={handlers.toggleMenu} />
 					<div ref={menuRef} className={styles.navs}>
-						<div>My Purchases</div>
-						<div>Signout</div>
+						<div onClick={() => history.go("/rentals")}>My Rentals</div>
+						<div
+							onClick={() => {
+								localStorage.removeItem("token");
+								history.go("/");
+							}}>
+							Signout
+						</div>
 					</div>
 				</div>
 			</div>

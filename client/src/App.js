@@ -5,18 +5,22 @@ import { Login, Signup } from "./Components/LoginSignup";
 import { SwitchTheme } from "./UI/SwitchTheme";
 import Navbar from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
+import Cart from "./Components/Cart";
+import auth from "./services/auth";
 
 const App = () => {
-	if (localStorage.getItem("theme") === "dark" || localStorage.getItem("theme") === "") {
-		document.body.classList.toggle("dark-theme");
-		localStorage.setItem("theme", "dark");
-	}
+	const [user, setUser] = React.useState();
+
+	React.useEffect(() => {
+		(localStorage.getItem("theme") === "dark" || !localStorage.getItem("theme")) && document.body.classList.add("dark-theme");
+		localStorage.getItem("theme") === "light" && document.body.classList.remove("dark-theme");
+		const token = auth.getCurrentUser();
+		token && !user && setUser(token);
+	}, [user]);
+
 	return (
 		<div style={{ background: "var(--main-bg)" }}>
-			<Switch>
-				{!true && <PublicRoutes />}
-				{true && <UserRoutes />}
-			</Switch>
+			{user ? <UserRoutes /> : <PublicRoutes />}
 			<div className='switchThemeWrapper'>
 				<SwitchTheme
 					boxStyles={{
@@ -35,7 +39,9 @@ const UserRoutes = () => (
 	<>
 		<Navbar />
 		<Switch>
-			<Route exact path='/' component={Dashboard} />
+			<Route exact path='/cart' component={Cart} />
+			<Route exact path='/dash' component={Dashboard} />
+			<Redirect from='/' to='/dash' />
 			<Redirect to='/' />
 		</Switch>
 	</>

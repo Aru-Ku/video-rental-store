@@ -19,6 +19,7 @@
 	position: relative;
 	margin-bottom: 15px;
 }
+
 .searchBox::after {
 	font-family: "FontAwesome";
 	content: "\f002";
@@ -26,12 +27,15 @@
 	top: 25%;
 	right: 5px;
 }
+
 .searchBoxSpan {
 	margin-top: 0;
 }
+
 .searchBoxInput {
 	padding-top: 0.5rem;
 }
+
 .searchBoxInput::placeholder {
 	color: var(--font);
 	opacity: 1;
@@ -55,9 +59,11 @@
 	justify-content: space-evenly;
 	align-content: flex-start;
 }
+
 .movieFlex:last-child {
 	margin-bottom: 100px;
 }
+
 .movieFlex div:empty {
 	height: 10px;
 	width: calc(95% / 2);
@@ -72,6 +78,7 @@
 	margin: 10px 5px;
 	box-shadow: 1px 1px 5px rgb(121, 121, 121);
 }
+
 .thumbnail {
 	width: 110px;
 }
@@ -79,7 +86,9 @@
 .movieContent {
 	padding: 5px 0 0 10px;
 	width: 100%;
+	overflow: hidden;
 }
+
 .movieContent div:nth-child(1) {
 	font-size: 1.1rem;
 	font-weight: 600;
@@ -90,16 +99,19 @@
 	white-space: nowrap;
 	overflow: hidden;
 }
+
 .movieContent div:nth-child(2) {
 	font-size: 0.8rem;
 	font-style: italic;
 }
+
 .movieContent div:nth-child(3) {
 	white-space: nowrap;
 	font-weight: 500;
 	font-size: 0.9rem;
 	text-overflow: ellipsis;
 }
+
 .movieContent a {
 	color: var(--links);
 	margin: 0 10px 0 0;
@@ -107,14 +119,98 @@
 	letter-spacing: 1px;
 	font-weight: 500;
 }
+
 .movieContent a:after {
 	content: " \f08e";
 }
-.movieContent button {
+
+.addToCart {
+	width: 40%;
+	cursor: pointer;
+	font-size: 18px;
+	position: absolute;
+	outline: none;
+	bottom: 5px;
+	right: 5px;
+	transform: translateY(0%);
+	opacity: 1;
+	transition: all 0.2s linear;
+}
+
+.movieContent.hide .addToCart {
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: all 0.2s linear;
+}
+
+.rentDays {
+	width: 250px;
+	text-align: left;
+	font-size: 1.1rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
+	transform: translateX(-100%);
+	opacity: 0;
+	transition: all 0.2s linear;
 }
+
+.movieContent.hide .rentDays {
+	transform: translateX(0);
+	opacity: 1;
+	transition: all 0.2s linear;
+}
+
+.itemcount {
+	width: 110px !important;
+	margin: 0 !important;
+	height: 2rem;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.itemcount button {
+	padding: 5px 12px;
+	font-size: 1.2rem;
+	background-color: #ffffff;
+	color: #000000;
+	text-align: center;
+	outline: none;
+	border: none;
+	z-index: 5;
+	border-color: black;
+	vertical-align: middle;
+}
+
+.itemcount button:nth-child(1) {
+	cursor: pointer;
+	border-radius: 50% 0 0 50%;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.itemcount button:nth-child(2) {
+	height: 100%;
+	padding: 0 10px;
+	font-size: 1.2rem;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.itemcount button:nth-child(3) {
+	border-radius: 0 50% 50% 0;
+	cursor: pointer;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
 .movieContent img {
 	position: absolute;
 	top: 10px;
@@ -127,14 +223,17 @@
 		padding: 0rem 1.3rem;
 		transition: padding 0.1s linear;
 	}
+
 	.moviesWrapper {
 		margin: 15px 0;
 		transition: all 0.1s linear;
 		padding: 0.6rem;
 	}
+
 	.movieFlex:last-child {
 		margin-bottom: 100px;
 	}
+
 	.movieData {
 		width: 100%;
 		margin: 5px 0;
@@ -146,13 +245,16 @@
 		padding: 0rem 3rem;
 		transition: padding 0.1s linear;
 	}
+
 	.movieData {
 		width: calc(95% / 2);
 		margin: 5px 0;
 	}
+
 	.movieFlex:last-child {
 		margin-bottom: 100px;
 	}
+
 	.moviesWrapper {
 		margin: 15px 0;
 		transition: all 0.1s linear;

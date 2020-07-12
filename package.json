@@ -1,27 +1,29 @@
 {
- "name": "video-rental-store",
- "version": "1.0.0",
- "author": "",
- "description": "Video Rental Service SPA",
- "main": "server.js",
- "scripts": {
-  "client": "cd client && yarn start",
-  "server": "nodemon server.js",
-  "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-  "dev:server": "cd client && yarn build && cd .. && yarn start",
-  "start": "node server.js",
-  "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
- },
- "license": "MIT",
- "devDependencies": {
-  "concurrently": "^5.2.0"
- },
- "dependencies": {
-  "body-parser": "^1.19.0",
-  "dotenv": "^8.2.0",
-  "express": "^4.17.1",
-  "pg": "^8.2.1",
-  "pg-hstore": "^2.3.3",
-  "sequelize": "^6.3.0"
- }
+	"name": "video-rental-store",
+	"version": "1.0.0",
+	"author": "",
+	"description": "Video Rental Service SPA",
+	"main": "server.js",
+	"scripts": {
+		"client": "cd client && yarn start",
+		"server": "nodemon server.js",
+		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+		"dev:server": "cd client && yarn build && cd .. && yarn start",
+		"start": "node server.js",
+		"heroku-postbuild": "cd client && yarn && npm install --only=dev --no-shrinkwrap && yarn build"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"concurrently": "^5.2.0"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"pg": "^8.2.1",
+		"pg-hstore": "^2.3.3",
+		"sequelize": "^6.3.0"
+	}
 }

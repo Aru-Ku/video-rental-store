@@ -5,8 +5,15 @@ const app = express();
 const port = process.env.PORT || 5000;
 require("dotenv").config();
 
+const db = require("./app/models");
+
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
+app.get("/", (req, res) => res.send("VRS"));
+// ROUTES
+require("./app/routes/auth")(app);
+require("./app/routes/movies")(app);
+require("./app/routes/user")(app);
 
 if (process.env.NODE_ENV === "production") {
 	// Serve any static files
