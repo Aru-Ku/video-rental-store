@@ -4,12 +4,12 @@ import styles from "../Styles/UiStyles.module.css";
 export const Input = (props) => {
 	const [cls, setCls] = React.useState("");
 	React.useEffect(() => {
-		if (props.value) {
-			setCls(styles.input + " " + styles.hascontent);
-		} else if (props.warnMsg) {
+		if (props.warnMsg) {
 			setCls(styles.input + " " + styles.hascontent + " " + styles.inputBorderRed);
 		} else if (props.success) {
 			setCls(styles.input + " " + styles.hascontent + " " + styles.inputBorderGreen);
+		} else if (props.value) {
+			setCls(styles.input + " " + styles.hascontent);
 		} else {
 			setCls(styles.input);
 		}

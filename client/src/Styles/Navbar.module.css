@@ -38,9 +38,11 @@
 .link {
 	color: var(--font);
 	text-decoration: none;
+	cursor: pointer;
 }
 
 .cart {
+	cursor: pointer;
 	padding: 0 10px;
 }
 
@@ -48,6 +50,10 @@
 	width: 200px;
 	display: flex;
 	justify-content: space-around;
+}
+
+.navs div {
+	cursor: pointer;
 }
 
 .selector {
