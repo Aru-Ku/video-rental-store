@@ -1,2 +1,2 @@
 # Procfile
-web: yarn global add sequelize-cli && cd app && npx sequelize db:migrate && npx sequelize db:seed:all
+web: cd app && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all
