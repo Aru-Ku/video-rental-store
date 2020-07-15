@@ -14,10 +14,10 @@
 		"dialect": "postgres"
 	},
 	"production": {
-		"username": "postgres",
-		"password": "postgres",
-		"database": "vrs",
-		"host": "localhost",
+		"username": "jiejgjeomzrrbf",
+		"password": "326bb0879eb19c07edd184533170f12a8a89977d5bdb1a570e05d9840de7de4f",
+		"database": "d36fdbd481fbqk",
+		"host": "ec2-54-236-169-55.compute-1.amazonaws.com",
 		"dialect": "postgres"
 	}
 }

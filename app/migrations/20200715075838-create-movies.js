@@ -7,10 +7,9 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('movies', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.BIGINT,
         primaryKey: true,
-        type: Sequelize.BIGINT
+        allowNull: false,
       },
       title: {
         type: Sequelize.STRING,
@@ -37,11 +36,11 @@ module.exports = {
         allowNull: false,
       },
       purchasedby: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         defaultValue: "null",
       },
       purchasedtill: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         defaultValue: "null",
       },
     });
