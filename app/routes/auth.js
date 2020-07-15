@@ -35,7 +35,6 @@ module.exports = function (app) {
 				res.status(200).send({
 					token: token,
 				});
-				// console.log(isPasswordMatched);
 			})
 			.catch((e) => console.log("error", e));
 	});

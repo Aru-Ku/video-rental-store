@@ -4,13 +4,15 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import { ToastProvider } from 'react-toast-notifications';
+
 
 ReactDOM.render(
-	<React.StrictMode>
+	<ToastProvider>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	</React.StrictMode>,
+	</ToastProvider>,
 	document.getElementById("root")
 );
 

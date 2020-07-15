@@ -10,10 +10,10 @@ module.exports = {
 				id: initialData["id"],
 				title: initialData["title"],
 				year: initialData["year"],
-				genres: initialData["genres"],
+				type: initialData["type"],
 				imdb: initialData["imdb"],
 				tmdb: initialData["tmdb"],
-				imageLink: initialData["imageLink"],
+				image: initialData["image"],
 			});
 		});
 		return queryInterface.bulkInsert("movies", initialData);

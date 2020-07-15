@@ -22,7 +22,7 @@ const Navbar = () => {
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
 					<div className={styles.logo}>
-						<div to='/' className={styles.link} onClick={() => history.push("/")}>
+						<div to='/' className={styles.link} onClick={() => history.go("/")}>
 							VRS
 						</div>
 					</div>

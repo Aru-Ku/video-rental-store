@@ -72,6 +72,26 @@
 	}
 }
 
+/** DAY INPUT  */
+.dayInputWrapper {
+	font-size: 1.1rem;
+	padding: 5px 0 0 0;
+}
+
+.dayInputBox {
+	width: 60px;
+	margin: 0 3px;
+	font-size: 1rem;
+	text-align: center;
+	outline: none;
+}
+
+@media (min-width: 769px) {
+	.dayInputWrapper {
+		padding-left: 50px;
+	}
+}
+
 /** SWITCH THEME */
 
 .StBox {

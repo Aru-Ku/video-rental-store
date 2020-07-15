@@ -125,23 +125,25 @@
 }
 
 .addToCart {
-	width: 40%;
+	width: 160px;
 	cursor: pointer;
 	font-size: 18px;
 	position: absolute;
 	outline: none;
 	bottom: 5px;
 	right: 5px;
-	transform: translateY(0%);
-	opacity: 1;
-	transition: all 0.2s linear;
+	background-color: var(--font);
+	color: var(--main-bg);
+	outline: none;
+	border: none;
 }
 
+/* 
 .movieContent.hide .addToCart {
 	transform: translateY(-100%);
 	opacity: 0;
 	transition: all 0.2s linear;
-}
+} */
 
 .rentDays {
 	width: 250px;

@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../Styles/Hero.module.css";
-import hoem1 from "../Assets/hoem-1.webp";
-import hoem2 from "../Assets/hoem-2.webp";
-import hoem3 from "../Assets/hoem-3.webp";
-import hoem4 from "../Assets/hoem-4.webp";
+import { hoem1, hoem2, hoem3, hoem4 } from '../Assets'
 import { Emoji } from "../UI/Elements";
 import { useHistory } from "react-router-dom";
 
-const Hero = (props) => {
+const Hero = () => {
 	const history = useHistory();
+	const [hidecls, setHideCls] = useState("")
 	const handlers = {
-		login: () => history.replace("/login"),
-		signup: () => history.replace("/signup"),
+		login: () => {
+			setHideCls(styles.hide);
+			setTimeout(() => history.push("/login"), 1000);
+		},
+		signup: () => {
+			setHideCls(styles.hide);
+			setTimeout(() => history.push("/signup"), 1000)
+		}
 	};
 
 	return (
-		<section className={styles.container}>
+		<section className={styles.container + " " + hidecls}>
 			<div className={styles.wrapper}>
 				<div className={styles.content}>
-					<div className={styles.head}>Video Rental Store</div>
+					<div className={styles.head + ' ' + hidecls}>Video Rental Store</div>
 					<div className={styles.points}>
 						<p>
 							Search for your favorite <Emoji label='Favorite' emoji='💕' />

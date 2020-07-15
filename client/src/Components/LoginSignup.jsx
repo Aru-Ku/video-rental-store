@@ -23,7 +23,7 @@ export const Login = () => {
 	const handler = {
 		goToSignup: () => {
 			setBoxCls(styles.boxClose);
-			setTimeout(() => history.push("/signup"), 900);
+			setTimeout(() => history.replace("/signup"), 900);
 		},
 		login: async () => {
 			setLoading(true);
@@ -63,7 +63,7 @@ export const Login = () => {
 
 	return (
 		<div className={styles.conatiner}>
-			<div className={styles.box + " " + boxCls}>
+			<div className={styles.boxLogin + " " + boxCls}>
 				<div className={styles.head}>Login to your account</div>
 				<div className={styles.link}>
 					New User ? <span onClick={handler.goToSignup}>Create new account</span>
@@ -85,7 +85,7 @@ export const Login = () => {
 	);
 };
 
-export const Signup = ({ change }) => {
+export const Signup = () => {
 	const history = useHistory();
 	const [email, setEmail] = React.useState("");
 	const [name, setName] = React.useState("");
@@ -99,15 +99,15 @@ export const Signup = ({ change }) => {
 	const [warnConfirmPwd, setWarnConfirmpwd] = React.useState(false);
 
 	React.useEffect(() => {
-		setBoxCls(styles.box + " " + styles.boxOpen);
+		setBoxCls(styles.boxOpen);
 		email !== "" && !/[\w-]+@([\w-]+\.)+[\w-]+/.test(email) ? setWarnEmail("Enter valid Email Address") : setWarnEmail("");
 		pwd !== "" && !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(pwd) ? setWarnPwd(true) : setWarnPwd(false);
 	}, [email, pwd]);
 
 	const handler = {
 		goTologin: () => {
-			setBoxCls(styles.box + " " + styles.boxClose);
-			setTimeout(() => history.push("/login"), 900);
+			setBoxCls(styles.boxClose);
+			setTimeout(() => history.replace("/login"), 900);
 		},
 		signUp: async () => {
 			setLoading(true);
@@ -141,7 +141,7 @@ export const Signup = ({ change }) => {
 
 	return (
 		<div className={styles.conatiner}>
-			<div className={boxCls}>
+			<div className={styles.boxSignup + " " + boxCls}>
 				<div className={styles.head}>Create account</div>
 				<div className={styles.link}>
 					Already have an account ? <span onClick={handler.goTologin}>Login</span>

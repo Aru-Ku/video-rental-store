@@ -3,18 +3,16 @@ import Hero from "./Components/Hero";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Login, Signup } from "./Components/LoginSignup";
 import { SwitchTheme } from "./UI/SwitchTheme";
-import Navbar from "./Components/Navbar";
-import Dashboard from "./Components/Dashboard";
-import Cart from "./Components/Cart";
-import auth from "./services/auth";
+import { Navbar, Dashboard, Cart } from "./Components";
+import { AuthService } from './services'
 
 const App = () => {
 	const [user, setUser] = React.useState();
 
 	React.useEffect(() => {
-		(localStorage.getItem("theme") === "dark" || !localStorage.getItem("theme")) && document.body.classList.add("dark-theme");
-		localStorage.getItem("theme") === "light" && document.body.classList.remove("dark-theme");
-		const token = auth.getCurrentUser();
+		(localStorage.getItem("theme") === "light" || !localStorage.getItem("theme")) && document.body.classList.remove("dark-theme");
+		localStorage.getItem("theme") === "dark" && document.body.classList.add("dark-theme");
+		const token = AuthService.getCurrentUser();
 		token && !user && setUser(token);
 	}, [user]);
 
@@ -39,10 +37,10 @@ const UserRoutes = () => (
 	<>
 		<Navbar />
 		<Switch>
-			<Route exact path='/cart' component={Cart} />
 			<Route exact path='/dash' component={Dashboard} />
-			<Redirect from='/' to='/dash' />
-			<Redirect to='/' />
+			<Route exact path='/cart' component={Cart} />
+			{/* <Redirect from='/' to='/dash' /> */}
+			<Redirect to='/dash' />
 		</Switch>
 	</>
 );

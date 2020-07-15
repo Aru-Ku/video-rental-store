@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "../Styles/Dashboard.module.css";
 import { Input } from "../UI/Input";
-import PremiumIcon from "../Assets/premium.png";
-import RegularIcon from "../Assets/regular.png";
-import OldIcon from "../Assets/old.png";
-import MoviesService from "../services/movies";
+import { MovieService, UserService } from "../services";
+import { PremiumIcon, RegularIcon, OldIcon } from '../Assets'
+import { useToasts } from 'react-toast-notifications'
 
 const Dashboard = () => {
 	const [searchText, setSearchText] = useState("");
 	const [movieData, setMovieData] = useState({});
-	useEffect(() => {
-		MoviesService.getMovieIds().then((res) => {
-			const movies = suffleMovieDetails(res.data);
-			const dt = movies.reduce((r, it, i) => {
-				r[i] = it;
-				return r;
-			}, {});
-			setMovieData(dt);
-		});
-	}, []);
+	const [cart, setCart] = useState([]);
+	const { addToast } = useToasts();
 	const suffleMovieDetails = (arrayData) => {
 		let i = arrayData.length - 1;
 		for (; i > 0; i--) {
@@ -28,8 +19,44 @@ const Dashboard = () => {
 		return arrayData;
 	};
 
+	useEffect(() => {
+		MovieService.getMovieIds().then((res) => {
+			const movies = suffleMovieDetails(res.data);
+			setMovieData(movies);
+		}).catch((e) => addToast("Error Fetching Movies", { appearance: 'error' }));
+		UserService.fetchCart().then(cartItems => {
+			if (!cartItems.error) setCart(cartItems.data || []);
+		}).catch((e) => addToast("Error Fetching Cart Items", { appearance: 'error' }));
+	}, [addToast]);
+
+	const handlers = {
+		add: (id) => {
+			var cartData = cart;
+			cartData.push(id);
+			handlers.sendToCart(cartData);
+			setCart(cartData);
+		},
+		remove: (id) => {
+			let cartData = cart.filter((ids) => ids !== id);
+			handlers.sendToCart(cartData);
+			setCart(cartData);
+		},
+		sendToCart: (data) => {
+			UserService.updateCart(data).then((data) => data).catch((e) => e);
+		},
+	};
+
 	const renderData = Object.keys(movieData).map((index) => {
-		return <MovileTile movieDetails={movieData[index]} key={index} />;
+		return (
+			<MovieTile
+				movieDetails={movieData[index]}
+				key={index}
+				updateCart={handlers.sendToCart}
+				userCart={cart}
+				add={handlers.add}
+				remove={handlers.remove}
+			/>
+		);
 	});
 	return (
 		<div className={styles.container}>
@@ -58,76 +85,61 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-const MovileTile = ({ movieDetails }) => {
-	const { id, title, year, genres, imdb, tmdb, imageLink } = movieDetails;
-	const [hideCls, setHideCls] = useState("");
-	const [noofDays, setNoOfDays] = useState(1);
+const MovieTile = ({ movieDetails, add, remove, userCart }) => {
+	const { id, title, year, type, imdb, tmdb, image } = movieDetails;
+	const [isInCart, setInCart] = useState(false);
+	const cart = document.getElementsByClassName("cart-icon")[0];
+	const removeBtnStyle = { color: "white", background: "red" };
+
+	useEffect(() => {
+		if (userCart.includes(id)) setInCart(true);
+		cart.attributes["data-cartcount"].value = userCart.length;
+	}, [userCart, id, cart]);
+
 	let [icon, alt] = ["", ""];
-	if (+year >= 2019) {
-		icon = PremiumIcon;
-		alt = "Premium Movie";
-	} else if (+year <= 2010) {
-		icon = OldIcon;
-		alt = "Old Movie";
-	} else {
-		icon = RegularIcon;
-		alt = "Regular Movie";
+	switch (type) {
+		case "new": icon = PremiumIcon; alt = "New Movie"; break;
+		case "old": icon = OldIcon; alt = "Old Movie"; break;
+		default: icon = RegularIcon; alt = "Regular Movie"; break;
 	}
 
 	const handler = {
 		addItem() {
-			const cart = document.getElementsByClassName("cart-icon")[0];
-			setHideCls(styles.hide);
+			add(id);
 			cart.classList.add("addItem");
 			var count = cart.attributes["data-cartcount"].value;
 			cart.attributes["data-cartcount"].value = +count + 1;
 			setTimeout(() => cart.classList.remove("addItem"), 500);
+			setInCart(true);
 		},
 		removeItem() {
-			const cart = document.getElementsByClassName("cart-icon")[0];
+			remove(id);
 			cart.classList.add("removeItem");
 			var count = cart.attributes["data-cartcount"].value;
 			cart.attributes["data-cartcount"].value = +count - 1;
 			setTimeout(() => cart.classList.remove("removeItem"), 500);
-		},
-		increaseValue() {
-			setNoOfDays(noofDays + 1);
-		},
-		decreaseValue() {
-			if (noofDays >= 2) {
-				setNoOfDays(noofDays - 1);
-			} else {
-				setHideCls("");
-				handler.removeItem();
-			}
+			setInCart(false);
 		},
 	};
 	return (
 		<div className={styles.movieData}>
-			<img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${imageLink}.jpg`} alt={title} className={styles.thumbnail} />
-			<div className={styles.movieContent + " " + hideCls}>
+			<img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${image}.jpg`} alt={title} className={styles.thumbnail} />
+			<div className={styles.movieContent}>
 				<div>{title}</div>
 				<div>{year}</div>
-				<div>{genres.replace(/\|/g, ", ")}</div>
 				<a href={`https://www.imdb.com/title/tt${imdb}`} rel='noopener noreferrer' target='_blank'>
 					IMDB
 				</a>
 				<a href={`https://www.themoviedb.org/movie/${tmdb}`} rel='noopener noreferrer' target='_blank'>
 					TMDB
 				</a>
-				<button className={styles.addToCart} onClick={handler.addItem}>
-					Add to cart
+				<button
+					style={!isInCart ? null : { ...removeBtnStyle }}
+					className={styles.addToCart}
+					onClick={!isInCart ? handler.addItem : handler.removeItem}>
+					{!isInCart ? "Add to cart" : "Remove"}
 				</button>
-				<div className={styles.rentDays}>
-					Rent for
-					<div className={styles.itemcount}>
-						<button onClick={handler.decreaseValue}>-</button>
-						<button>{noofDays}</button>
-						<button onClick={handler.increaseValue}>+</button>
-					</div>{" "}
-					Days
-				</div>
-				<img src={icon} title={alt} alt={alt} />
+				<img onClick={handler.removeItem} src={icon} title={alt} alt={alt} />
 			</div>
 		</div>
 	);

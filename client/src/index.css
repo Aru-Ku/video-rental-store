@@ -24,7 +24,10 @@ body {
 	--input-bg: rgb(227, 227, 227);
 	--links: rgb(28, 28, 206);
 	--depth-sh: rgba(0, 0, 0, 0.5);
-
+	user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
 	color: var(--font);
 	background: var(--main-bg);
 }
@@ -34,22 +37,6 @@ body {
 	bottom: 0;
 	clear: both;
 	z-index: 40;
-}
-
-/** SCROLLBARS */
-div::-webkit-scrollbar {
-	width: 6px;
-	height: 4px;
-}
-div::-webkit-scrollbar-track {
-	background: var(--input-bg);
-}
-div::-webkit-scrollbar-thumb {
-	background: var(--font);
-	border-radius: 10px;
-}
-div::-webkit-scrollbar-thumb:hover {
-	background: var(--font);
 }
 
 /** CART */
