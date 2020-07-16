@@ -34,7 +34,7 @@ const Navbar = () => {
 					</div>
 					<div ref={btnRef} className={styles.selector} onClick={handlers.toggleMenu} />
 					<div ref={menuRef} className={styles.navs}>
-						<div onClick={() => history.go("/rentals")}>My Rentals</div>
+						<div onClick={() => history.push("/my-rental")}>My Rentals</div>
 						<div
 							onClick={() => {
 								localStorage.removeItem("token");

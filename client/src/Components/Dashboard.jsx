@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styles from "../Styles/Dashboard.module.css";
+import infoStyles from '../Styles/Cart.module.css';
 import { Input } from "../UI/Input";
 import { MovieService, UserService } from "../services";
-import { PremiumIcon, RegularIcon, OldIcon } from '../Assets'
-import { useToasts } from 'react-toast-notifications'
+import { PremiumIcon, RegularIcon, OldIcon } from '../Assets';
+import { useToasts } from 'react-toast-notifications';
+import { Information } from './Cart';
 
 const Dashboard = () => {
 	const [searchText, setSearchText] = useState("");
 	const [movieData, setMovieData] = useState({});
 	const [cart, setCart] = useState([]);
+	const [infoBox, showInfoBox] = useState("");
 	const { addToast } = useToasts();
 	const suffleMovieDetails = (arrayData) => {
 		let i = arrayData.length - 1;
@@ -59,27 +62,34 @@ const Dashboard = () => {
 		);
 	});
 	return (
-		<div className={styles.container}>
-			<div className={styles.dashboard}>
-				<div className={styles.searchBox}>
-					<Input
-						placeholder='Search movies'
-						value={searchText}
-						onchange={(e) => setSearchText(e.target.value)}
-						inputClass={styles.searchBoxInput}
-						spanClass={styles.searchBoxSpan}
-					/>
-				</div>
-				<div className={styles.moviesWrapper}>
-					<div className={styles.movieFlex}>
-						{renderData}
-						<div />
-						<div />
-						<div />
+		<>
+			<div className={styles.container}>
+				<div className={styles.dashboard}>
+					<div className={styles.topBar}>
+						<div className={styles.searchBox}>
+							<Input
+								placeholder='Search movies'
+								value={searchText}
+								onchange={(e) => setSearchText(e.target.value)}
+								inputClass={styles.searchBoxInput}
+								spanClass={styles.searchBoxSpan}
+							/>
+						</div>
+						<div className={styles.info} onClick={() => showInfoBox(infoStyles.open)} />
+					</div>
+					<div className={styles.moviesWrapper}>
+						<div className={styles.movieFlex}>
+							{renderData}
+							<div />
+							<div />
+							<div />
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			{infoBox && <div className={styles.backdrop} onClick={() => showInfoBox("")} />}
+			<Information info={infoBox} />
+		</>
 	);
 };
 
@@ -139,7 +149,7 @@ const MovieTile = ({ movieDetails, add, remove, userCart }) => {
 					onClick={!isInCart ? handler.addItem : handler.removeItem}>
 					{!isInCart ? "Add to cart" : "Remove"}
 				</button>
-				<img onClick={handler.removeItem} src={icon} title={alt} alt={alt} />
+				<img src={icon} title={alt} alt={alt} />
 			</div>
 		</div>
 	);

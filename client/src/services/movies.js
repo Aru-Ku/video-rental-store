@@ -6,16 +6,19 @@ const getMovieIds = () => {
 };
 
 const getMoviesForCart = (ids) => {
-	return axios.post(
-		"/api/movies/tocart",
-		{ data: ids },
-		{
-			headers: { token: user.userToken() },
-		}
-	);
+	return axios.post("/api/movies/tocart", { data: ids }, {
+		headers: { token: user.userToken() },
+	});
 };
+
+const getUserPurchasedMovies = () => {
+	return axios.get("/api/movies/userpurchased", {
+		headers: { token: user.userToken() },
+	})
+}
 
 export default {
 	getMovieIds,
 	getMoviesForCart,
+	getUserPurchasedMovies
 };

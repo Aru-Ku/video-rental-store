@@ -1,0 +1,88 @@
+.container {
+	width: 100%;
+	height: 100%;
+	margin-top: 60px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.contain {
+	padding: 0 30vw;
+	height: 92%;
+}
+
+.purchasedItemsWrapper {
+  background: var(--input-bg);
+	width: 100%;
+	height: 100%;
+	padding: 0.8rem 0 0 0.6rem;
+	transition: padding 0.2s linear;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	position: relative;
+	box-shadow: inset 0 5px 5px var(--depth-sh);
+}
+
+.item {
+  width: calc(100% - 0.6rem);
+  display: flex;
+	background-color: var(--main-bg);
+	position: relative;
+	margin-bottom: 15px;
+	box-shadow: 1px 1px 5px rgb(121, 121, 121);
+}
+
+.content {
+  width: 100%;
+  padding-left: 8px;
+  overflow: hidden;
+}
+.content div:nth-child(1) {
+  font-size: 1.3rem;
+  padding-top: 6px;
+  font-weight: 500;
+  width: 90%;
+  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.content div:nth-child(2) {
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-style: italic;
+}
+.content div:nth-child(3) {
+  font-size: 1.23rem;
+  position: absolute;
+  bottom: 10%;
+}
+.content div:nth-child(3)::before {
+  font-style: italic;
+  font-size: 1.1rem;
+  content: "Rented till: ";
+}
+.content img {
+  position: absolute;
+  width: 23px;
+  top: 5px;
+  right: 8px;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+	.contain {
+		padding: 0 20vw;
+	}
+}
+
+@media (max-width: 769px) {
+	.contain {
+		padding: 0 2rem;
+	}
+}
+
+@media (max-width: 1500px) and (min-width: 1025px) {
+	.contain {
+		padding: 0 25vw;
+	}
+}

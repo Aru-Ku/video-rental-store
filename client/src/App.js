@@ -1,8 +1,6 @@
 import React from "react";
-import Hero from "./Components/Hero";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { Login, Signup } from "./Components/LoginSignup";
-import { Navbar, Dashboard, Cart } from "./Components";
+import { Navbar, Dashboard, Cart, Login, Signup, MyRentals, Hero } from "./Components";
 import { AuthService } from './services'
 
 const App = () => {
@@ -26,7 +24,7 @@ const UserRoutes = () => (
 		<Switch>
 			<Route exact path='/dash' component={Dashboard} />
 			<Route exact path='/cart' component={Cart} />
-			{/* <Redirect from='/' to='/dash' /> */}
+			<Route exact path='/my-rental' component={MyRentals} />
 			<Redirect to='/dash' />
 		</Switch>
 	</>

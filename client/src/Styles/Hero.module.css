@@ -92,6 +92,8 @@
 	top: 0;
 	right: 0;
 	display: inline;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .hoem1,

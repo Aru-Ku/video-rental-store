@@ -26,7 +26,12 @@ const fetchCart = () => {
 const makePurchase = (purchaseDetails, bonusPoints) => {
 	return axios.post("/api/user/makepurchase", { purchaseDetails, bonusPoints }, {
 		headers: { token: userToken() },
-	})
+	});
+}
+const getBonusPoints = () => {
+	return axios.get("/api/user/getbonuspoints", {
+		headers: { token: userToken() },
+	});
 }
 
 export default {
@@ -38,5 +43,6 @@ export default {
 	expTime,
 	updateCart,
 	fetchCart,
-	makePurchase
+	makePurchase,
+	getBonusPoints
 };

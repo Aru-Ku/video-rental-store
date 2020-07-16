@@ -9,6 +9,9 @@ import { useHistory } from 'react-router-dom'
 const Cart = () => {
 	const [cart, setCart] = useState([]);
 	const [totalAmount, setTotalAmount] = useState(0)
+	const [userBP, setUserBP] = useState(0)
+	const [infoBox, showInfoBox] = useState("")
+	const [purchaseBox, showPurchaseBox] = useState("")
 	const { addToast } = useToasts();
 	const history = useHistory();
 
@@ -22,8 +25,7 @@ const Cart = () => {
 							let moviesDataForCart = [];
 							res.data.forEach(item => {
 								moviesDataForCart.push({
-									id: item.id, title: item.title, year: item.year,
-									type: item.type, amount: 0, days: 0
+									id: item.id, title: item.title, year: item.year, type: item.type, amount: 0, days: 0
 								})
 							})
 							setCart(moviesDataForCart)
@@ -32,6 +34,12 @@ const Cart = () => {
 				}
 			})
 			.catch(() => addToast("Error Fetching Movies", { appearance: 'error' }));
+		UserService.getBonusPoints()
+			.then(res => {
+				if (res.error) throw Error;
+				setUserBP(res.data.bonuspoints)
+			})
+			.catch(() => addToast("Error Fetching BonusPoints", { appearance: 'error' }));
 	}, [addToast]);
 
 	const handlers = {
@@ -56,12 +64,11 @@ const Cart = () => {
 			e.preventDefault();
 			let purchaseDetails = [];
 			const currentTime = new Date();
-			let bonusPoints = 0;
+			let bonusPoints = userBP;
 			cart.forEach(item => {
 				item.type === "new" ? bonusPoints += 2 : bonusPoints += 1;
 				purchaseDetails.push({ id: item.id, till: new Date(currentTime.getTime() + item.days * 86400000) })
 			})
-			console.log(purchaseDetails)
 			UserService.makePurchase(purchaseDetails, bonusPoints).then((res) => {
 				if (res.data.message === "success") {
 					addToast("Thankyou for purchasing", { appearance: 'success', autoDismiss: true })
@@ -70,7 +77,13 @@ const Cart = () => {
 			}).catch(() => {
 				addToast("Purchase Failed", { appearance: 'error', autoDismiss: true })
 			})
-
+		},
+		displayPurchaseModel: (e) => {
+			if (!cart.some(item => item.amount === 0)) {
+				e.preventDefault();
+				showPurchaseBox(styles.open)
+				return
+			}
 		}
 	}
 
@@ -78,18 +91,24 @@ const Cart = () => {
 		return <CartItem key={id} movieDetails={cart[id]} updateAmount={handlers.updateAmount} />;
 	});
 	return (
-		<div className={styles.container}>
-			<div className={styles.contain}>
-				<div className={styles.topBar}>
-					<span>{`Total Amount: € ${totalAmount}`}</span>
-					{cart.length !== 0 && <button form="CARTFORM" onClick={handlers.purchase}>Rent</button>}
+		<>
+			<div className={styles.container}>
+				<div className={styles.contain}>
+					<div className={styles.topBar}>
+						<span>{`Bonus Points: ${userBP}`}</span>
+						{cart.length !== 0 && <div className={styles.info} onClick={() => showInfoBox(styles.open)} />}
+						{cart.length !== 0 && <button form="CARTFORM" onClick={(e) => handlers.displayPurchaseModel(e)} >Rent</button>}
+					</div>
+					{cart.length !== 0 ?
+						<form id='CARTFORM' className={styles.cartItemsWrappper}>
+							{cartItems}
+						</form> : <div style={{ textAlign: 'center' }}>Looks like your cart is empty..</div>}
 				</div>
-				{cart.length !== 0 ?
-					<form id='CARTFORM' className={styles.cartItemsWrappper}>
-						{cartItems}
-					</form> : "Looks like your cart is empty.."}
 			</div>
-		</div>
+			{(infoBox || purchaseBox) && <div className={styles.backdrop} onClick={() => { showInfoBox(""); showPurchaseBox("") }} />}
+			<Information info={infoBox} />
+			<PurchaseModel totalAmount={totalAmount} purchase={handlers.purchase} show={purchaseBox} />
+		</>
 	);
 };
 
@@ -132,3 +151,47 @@ const CartItem = ({ movieDetails, updateAmount }) => {
 };
 
 export default Cart;
+
+export const Information = ({ info }) => (
+	<div className={styles.infoContainer + " " + info}>
+		<div className={styles.model}>
+			<div className={styles.content}>
+				<div>Pricing</div>
+				<div>Premium Fee: €40 | Regular Fee: €30</div>
+				<ul>
+					<li><img src={PremiumIcon} alt="New Movie" /><span>Premium fee times number of days rented.</span></li>
+					<li><img src={RegularIcon} alt="Regular Movie" /><span>Regular fee once for the first 3 days plus Regular fee times the number of days over 3.</span></li>
+					<li><img src={OldIcon} alt="Old Movie" /><span>Regular fee once for the first 5 days plus Regular fee times the number of days over5.</span></li>
+				</ul>
+			</div>
+			<div className={styles.content}>
+				<div>Bonus Points</div>
+				<ul>
+					<li> ➥ A new release gives 2 points and other films give 1 point per rental (regardless of the time rented).</li>
+					<li> ➥ 25 points pays the rental for one day</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+)
+
+const PurchaseModel = ({ totalAmount, purchase, show }) => {
+	const [isChecked, setChecked] = useState(false)
+	console.log(isChecked)
+	return (
+		<div className={styles.purchaseContainer + " " + show}>
+			<div className={styles.purchaseWrapper}>
+				<div style={{ textAlign: 'center' }}>Total Amount: €{totalAmount}</div>
+				<div>
+					<form>
+						<input type="checkbox" id="terms" value={isChecked} onClick={() => setChecked(!isChecked)} required />
+						<label htmlFor="terms">Agree to rental terms</label>
+						<input type="submit" onClick={(e) => {
+							if (isChecked) purchase(e)
+						}} value="Make Payment" />
+					</form>
+				</div>
+			</div>
+		</div>
+	)
+}
