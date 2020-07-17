@@ -34,4 +34,19 @@ module.exports = function (app) {
 			.then((data) => res.status(200).send(data))
 			.catch((e) => res.send({ error: e }));
 	})
+	app.get("/api/movies/checkexpiration", (req, res) => {
+		sequelize
+			.query("SELECT id, purchasedtill FROM movies WHERE purchasedby != 'null';", { type: QueryTypes.SELECT })
+			.then((data) => {
+				data.forEach(item => {
+					if (new Date().getTime() >= new Date(item.purchasedtill).getTime()) {
+						Movies.update({ purchasedby: 'null', purchasedtill: 'null' }, {
+							where: { id: item.id }
+						})
+					}
+				});
+				res.send("Done")
+			})
+			.catch((e) => res.send({ error: e }));
+	})
 };

@@ -26,6 +26,7 @@ const Dashboard = () => {
 	};
 
 	useEffect(() => {
+		MovieService.checkExpirationTime();
 		MovieService.getMovieIds().then((res) => {
 			const movies = suffleMovieDetails(res.data);
 			setMovieData(movies);

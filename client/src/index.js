@@ -1,10 +1,11 @@
 import React from "react";
+import loadable from '@loadable/component'
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { ToastProvider } from 'react-toast-notifications';
+const App = loadable(() => import('./App'))
 
 
 ReactDOM.render(

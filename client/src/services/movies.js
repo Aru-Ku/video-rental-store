@@ -16,9 +16,13 @@ const getUserPurchasedMovies = () => {
 		headers: { token: user.userToken() },
 	})
 }
+const checkExpirationTime = () => {
+	return axios.get("/api/movies/checkexpiration")
+}
 
 export default {
 	getMovieIds,
 	getMoviesForCart,
-	getUserPurchasedMovies
+	getUserPurchasedMovies,
+	checkExpirationTime
 };

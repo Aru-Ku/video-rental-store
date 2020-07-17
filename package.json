@@ -17,6 +17,7 @@
 		"concurrently": "^5.2.0"
 	},
 	"dependencies": {
+		"@loadable/component": "^5.13.1",
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
 		"dotenv": "^8.2.0",
