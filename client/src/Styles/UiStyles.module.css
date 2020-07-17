@@ -92,42 +92,6 @@
 	}
 }
 
-/** SWITCH THEME */
-
-.StBox {
-	width: 60px;
-	height: 30px;
-	background: var(--main-bg);
-	border: 1px solid var(--font);
-	border-radius: 20px;
-}
-
-.StCircle {
-	margin: 5% 0 0 5%;
-	width: 40%;
-	height: 80%;
-	border-radius: 50%;
-	box-shadow: 0 4px 4px rgba(26, 53, 71, 0.25), 0 0 0 1px rgba(26, 53, 71, 0.07);
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	-webkit-transition: all 0.4s cubic-bezier(0.54, 1.6, 0.5, 1);
-	transition: all 0.4s cubic-bezier(0.54, 1.6, 0.5, 1);
-	cursor: pointer;
-	background-image: url("../Assets/sun.png");
-}
-
-.StCircleMoon {
-	background-image: url("../Assets/moon.png");
-	margin-left: 55%;
-	transition: margin-left 0.2s linear;
-}
-
-.StCircleSun {
-	background-image: url("../Assets/sun.png");
-	transition: margin-left 0.2s linear;
-}
-
 /** Spinner */
 
 .circle1,
@@ -168,16 +132,4 @@
 		transform: scale(1);
 		-webkit-transform: scale(1);
 	}
-}
-
-/** BACKDROP */
-
-.backdrop {
-	width: 100vh;
-	height: 100vh;
-	position: relative;
-	top: 0;
-	left: 0;
-	background-color: #00000088;
-	z-index: 50;
 }

@@ -14,7 +14,7 @@
 }
 .topBar {
 	width: 95%;
-	height: 30px;
+	height: 40px;
 	display: flex;	
 	position: relative;
 	justify-content: space-between;
@@ -101,6 +101,7 @@
 
 .thumbnail {
 	width: 110px;
+	height: 160px
 }
 
 .movieContent {
@@ -157,13 +158,6 @@
 	outline: none;
 	border: none;
 }
-
-/* 
-.movieContent.hide .addToCart {
-	transform: translateY(-100%);
-	opacity: 0;
-	transition: all 0.2s linear;
-} */
 
 .rentDays {
 	width: 250px;

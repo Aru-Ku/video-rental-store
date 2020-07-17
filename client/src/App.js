@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Navbar, Dashboard, Cart, Login, Signup, MyRentals, Hero } from "./Components";
-import { AuthService } from './services'
+import AuthService from './services/auth'
 
 const App = () => {
 	const [user, setUser] = React.useState();

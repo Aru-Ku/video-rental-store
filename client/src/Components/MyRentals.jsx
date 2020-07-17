@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from '../Styles/MyRentals.module.css';
-import { MovieService } from "../services";
+import MovieService from "../services/movies";
 import { PremiumIcon, RegularIcon, OldIcon } from '../Assets'
 import { useToasts } from 'react-toast-notifications'
 
 const MyRentals = () => {
   const [purchasedItems, setPurchasedItems] = useState([]);
+  const [isDataLoaded, setDataLoaded] = useState(false);
   const { addToast } = useToasts();
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const MyRentals = () => {
       .getUserPurchasedMovies()
       .then(res => {
         if (!res.data.error) setPurchasedItems(res.data)
+        setTimeout(() => setDataLoaded(true), 500);
       })
       .catch(() => addToast("Error Fetching Movies", { appearance: 'error' }))
   }, [addToast])
@@ -26,7 +28,7 @@ const MyRentals = () => {
       <div className={styles.contain}>
         {purchasedItems.length !== 0 ?
           <div className={styles.purchasedItemsWrapper}>
-            {eachPurchasedItem}
+            {isDataLoaded ? eachPurchasedItem : <div style={{ width: '100%', textAlign: 'center' }}>Loading...</div>}
           </div> : <div style={{ textAlign: 'center' }}>You haven't purchased any movies</div>}
       </div>
     </div>

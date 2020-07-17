@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "../Styles/Dashboard.module.css";
 import infoStyles from '../Styles/Cart.module.css';
 import { Input } from "../UI/Input";
-import { MovieService, UserService } from "../services";
+import MovieService from "../services/movies";
+import UserService from "../services/user";
 import { PremiumIcon, RegularIcon, OldIcon } from '../Assets';
 import { useToasts } from 'react-toast-notifications';
 import { Information } from './Cart';
@@ -11,8 +12,10 @@ const Dashboard = () => {
 	const [searchText, setSearchText] = useState("");
 	const [movieData, setMovieData] = useState({});
 	const [cart, setCart] = useState([]);
+	const [isDataLoaded, setDataLoaded] = useState(false)
 	const [infoBox, showInfoBox] = useState("");
 	const { addToast } = useToasts();
+
 	const suffleMovieDetails = (arrayData) => {
 		let i = arrayData.length - 1;
 		for (; i > 0; i--) {
@@ -26,6 +29,7 @@ const Dashboard = () => {
 		MovieService.getMovieIds().then((res) => {
 			const movies = suffleMovieDetails(res.data);
 			setMovieData(movies);
+			setTimeout(() => setDataLoaded(true), 1000);
 		}).catch((e) => addToast("Error Fetching Movies", { appearance: 'error' }));
 		UserService.fetchCart().then(cartItems => {
 			if (!cartItems.error) setCart(cartItems.data || []);
@@ -49,7 +53,7 @@ const Dashboard = () => {
 		},
 	};
 
-	const renderData = Object.keys(movieData).map((index) => {
+	const RenderMovies = Object.keys(movieData).map((index) => {
 		return (
 			<MovieTile
 				movieDetails={movieData[index]}
@@ -79,7 +83,7 @@ const Dashboard = () => {
 					</div>
 					<div className={styles.moviesWrapper}>
 						<div className={styles.movieFlex}>
-							{renderData}
+							{isDataLoaded ? RenderMovies : <div style={{ width: '100%', textAlign: 'center' }}>Loading...</div>}
 							<div />
 							<div />
 							<div />
@@ -151,6 +155,6 @@ const MovieTile = ({ movieDetails, add, remove, userCart }) => {
 				</button>
 				<img src={icon} title={alt} alt={alt} />
 			</div>
-		</div>
+		</div >
 	);
 };

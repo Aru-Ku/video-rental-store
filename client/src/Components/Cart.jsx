@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "../Styles/Cart.module.css";
 import { PremiumIcon, RegularIcon, OldIcon } from '../Assets'
-import { MovieService, UserService } from "../services";
+import MovieService from "../services/movies";
+import UserService from "../services/user";
 import { DayInput } from "../UI/Input";
 import { useToasts } from 'react-toast-notifications'
 import { useHistory } from 'react-router-dom'
@@ -12,6 +13,7 @@ const Cart = () => {
 	const [userBP, setUserBP] = useState(0)
 	const [infoBox, showInfoBox] = useState("")
 	const [purchaseBox, showPurchaseBox] = useState("")
+	const [isDataLoaded, setDataLoaded] = useState(false)
 	const { addToast } = useToasts();
 	const history = useHistory();
 
@@ -28,7 +30,8 @@ const Cart = () => {
 									id: item.id, title: item.title, year: item.year, type: item.type, amount: 0, days: 0
 								})
 							})
-							setCart(moviesDataForCart)
+							setCart(moviesDataForCart);
+							setTimeout(() => setDataLoaded(true), 1000);
 						})
 						.catch(() => addToast("Error Fetching Movies", { appearance: 'error' }));
 				}
@@ -95,13 +98,13 @@ const Cart = () => {
 			<div className={styles.container}>
 				<div className={styles.contain}>
 					<div className={styles.topBar}>
-						<span>{`Bonus Points: ${userBP}`}</span>
+						<span>{`Bonus Points: ${userBP || 0}`}</span>
 						{cart.length !== 0 && <div className={styles.info} onClick={() => showInfoBox(styles.open)} />}
 						{cart.length !== 0 && <button form="CARTFORM" onClick={(e) => handlers.displayPurchaseModel(e)} >Rent</button>}
 					</div>
 					{cart.length !== 0 ?
 						<form id='CARTFORM' className={styles.cartItemsWrappper}>
-							{cartItems}
+							{isDataLoaded ? cartItems : <div style={{ width: '100%', textAlign: 'center' }}>Loading...</div>}
 						</form> : <div style={{ textAlign: 'center' }}>Looks like your cart is empty..</div>}
 				</div>
 			</div>
@@ -177,7 +180,6 @@ export const Information = ({ info }) => (
 
 const PurchaseModel = ({ totalAmount, purchase, show }) => {
 	const [isChecked, setChecked] = useState(false)
-	console.log(isChecked)
 	return (
 		<div className={styles.purchaseContainer + " " + show}>
 			<div className={styles.purchaseWrapper}>

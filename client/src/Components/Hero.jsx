@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "../Styles/Hero.module.css";
-import { hoem1, hoem2, hoem3, hoem4 } from '../Assets'
 import { Emoji } from "../UI/Elements";
 import { useHistory } from "react-router-dom";
 
@@ -37,18 +36,13 @@ const Hero = () => {
 						<p>It's that simple.</p>
 					</div>
 					<div className={styles.loginButton}>
-						<button onClick={handlers.login}></button>
+						<button onClick={handlers.login} aria-label="Login Button" />
 						<div>
 							New user ? <span onClick={handlers.signup}>SignUp</span>
 						</div>
 					</div>
 				</div>
-				<div className={styles.hoem}>
-					<img className={styles.hoem1} src={hoem1} alt='VRS' />
-					<img className={styles.hoem2} src={hoem2} alt='VRS' />
-					<img className={styles.hoem3} src={hoem3} alt='VRS' />
-					<img className={styles.hoem4} src={hoem4} alt='VRS' />
-				</div>
+				<div className={styles.banner} />
 			</div>
 		</section>
 	);

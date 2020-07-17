@@ -9,15 +9,11 @@ export const Emoji = ({ label, emoji }) => {
 	);
 };
 
-export const Spinner = () => {
+export const Spinner = ({ bgColor }) => {
 	return (
 		<div>
-			<div className={styles.circle1}></div>
-			<div className={styles.circle2}></div>
+			<div className={styles.circle1} style={{ backgroundColor: bgColor }}></div>
+			<div className={styles.circle2} style={{ backgroundColor: bgColor }}></div>
 		</div>
 	);
-};
-
-export const BackDrop = ({ close }) => {
-	return <div onClick={close} className={styles.backdrop}></div>;
 };
