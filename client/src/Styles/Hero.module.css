@@ -79,10 +79,15 @@
 	right: 0;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	background-image: url('../Assets/banner.jpg');
+	background-image: url("../Assets/banner.jpg");
 	animation: banner-right 1.5s cubic-bezier(0, 0.3, 0.3, 1);
 	width: 100vw;
-	height: 100vh	;
+	height: 100vh;
+}
+
+.container.hide .banner {
+	opacity: 0;
+	transition: all 1s cubic-bezier(0, 1, 1, 1);
 }
 
 @keyframes point {
