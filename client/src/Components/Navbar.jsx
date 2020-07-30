@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "../Styles/Navbar.module.css";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
-	const btnRef = React.useRef();
-	const menuRef = React.useRef();
-	const backdropRef = React.useRef();
+	const btnRef = useRef();
+	const menuRef = useRef();
+	const backdropRef = useRef();
 	const history = useHistory();
 
 	const handlers = {
@@ -22,13 +22,13 @@ const Navbar = () => {
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
 					<div className={styles.logo}>
-						<div to='/' className={styles.link} onClick={() => history.go("/")}>
+						<div className={styles.link} onClick={() => history.go("/")}>
 							VRS
 						</div>
 					</div>
 					<div style={{ flexGrow: 1 }} />
 					<div className={styles.cart}>
-						<div to='/cart' className='cart-icon' data-cartcount='0' onClick={() => history.push("/cart")}>
+						<div className='cart-icon' data-cartcount='0' onClick={() => history.push("/cart")}>
 							CART <span />
 						</div>
 					</div>

@@ -37,18 +37,7 @@ export const DayInput = ({ id, value, onchange }) => {
 	return (
 		<div className={styles.dayInputWrapper}>
 			Rent for
-			<input className={styles.dayInputBox} type='number' list={id} value={value} min={1} onChange={onchange} required />
-			<datalist id={id}>
-				<option value={1} />
-				<option value={2} />
-				<option value={3} />
-				<option value={4} />
-				<option value={5} />
-				<option value={6} />
-				<option value={7} />
-				<option value={8} />
-				<option value={9} />
-			</datalist>
+			<input className={styles.dayInputBox} type='number' value={value} min={1} onChange={onchange} required />
 			Days
 		</div>
 	);

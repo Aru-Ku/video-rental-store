@@ -13,8 +13,8 @@
 }
 
 .purchasedItemsWrapper {
-  background: var(--input-bg);
-	width: 100%;
+	background: var(--input-bg);
+	/* width: ; */
 	height: 100%;
 	padding: 0.8rem 0 0 0.6rem;
 	transition: padding 0.2s linear;
@@ -25,8 +25,8 @@
 }
 
 .item {
-  width: calc(100% - 0.6rem);
-  display: flex;
+	width: calc(100% - 0.6rem);
+	display: flex;
 	background-color: var(--main-bg);
 	position: relative;
 	margin-bottom: 15px;
@@ -34,39 +34,39 @@
 }
 
 .content {
-  width: 100%;
-  padding-left: 8px;
-  overflow: hidden;
+	width: 100%;
+	padding-left: 8px;
+	overflow: hidden;
 }
 .content div:nth-child(1) {
-  font-size: 1.3rem;
-  padding-top: 6px;
-  font-weight: 500;
-  width: 90%;
-  text-overflow: ellipsis;
+	font-size: 1.3rem;
+	padding-top: 6px;
+	font-weight: 500;
+	width: 90%;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
 .content div:nth-child(2) {
-  font-size: 0.8rem;
-  font-weight: 600;
-  font-style: italic;
+	font-size: 0.8rem;
+	font-weight: 600;
+	font-style: italic;
 }
 .content div:nth-child(3) {
-  font-size: 1.23rem;
-  position: absolute;
-  bottom: 10%;
+	font-size: 1.23rem;
+	position: absolute;
+	bottom: 10%;
 }
 .content div:nth-child(3)::before {
-  font-style: italic;
-  font-size: 1.1rem;
-  content: "Rented till: ";
+	font-style: italic;
+	font-size: 1.1rem;
+	content: "Rented till: ";
 }
 .content img {
-  position: absolute;
-  width: 23px;
-  top: 5px;
-  right: 8px;
+	position: absolute;
+	width: 23px;
+	top: 5px;
+	right: 8px;
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {

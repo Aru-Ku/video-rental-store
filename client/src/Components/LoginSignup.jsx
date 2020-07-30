@@ -20,6 +20,7 @@ export const Login = () => {
 	}, [email]);
 
 	const checkEmail = (email) => email !== "" && !/[\w-]+@([\w-]+\.)+[\w-]+/.test(email);
+
 	const handler = {
 		goToSignup: () => {
 			setBoxCls(styles.boxClose);
@@ -42,7 +43,6 @@ export const Login = () => {
 				}
 			} catch (error) {
 				setLoading(false);
-				console.log(error.message);
 				switch (error.message) {
 					case "No Email":
 						return setWarnEmail("Required");
@@ -112,28 +112,33 @@ export const Signup = () => {
 		signUp: async () => {
 			setLoading(true);
 			setWarnName(false);
-			if (name === "") {
-				setWarnName(true);
-				return;
-			}
-			if (!email) {
-				setWarnEmail("Valid Email Required");
-				return;
-			}
-			if (!pwd) {
-				setWarnPwd(true);
-				return;
-			}
-			if (!confirmPwd || confirmPwd !== pwd) {
-				setWarnConfirmpwd(true);
-			}
-			if (!warnEmail && !warnPwd && !warnName && pwd === confirmPwd) {
-				const res = await auth.signup(email.toLowerCase(), pwd, name);
-				if (res.data.error === "Email already registered") {
-					return setWarnEmail("Email already registered");
-				} else {
-					localStorage.setItem("token", res.data.token);
-					history.go("/dash");
+			try {
+				if (name === "") throw new Error("Warn Name");
+				if (!email) throw new Error("Valid Email Required");
+				if (!pwd) throw new Error("Warn Pwd");
+				if (!confirmPwd || confirmPwd !== pwd) throw new Error("Warn Confirm Pwd");
+				if (!warnEmail && !warnPwd && !warnName && pwd === confirmPwd) {
+					const res = await auth.signup(email.toLowerCase(), pwd, name);
+					if (res.data.error === "Email already registered") {
+						return setWarnEmail("Email already registered");
+					} else {
+						localStorage.setItem("token", res.data.token);
+						history.go("/dash");
+					}
+				}
+			} catch (error) {
+				setLoading(false);
+				switch (error.message) {
+					case "Warn Name":
+						return setWarnName(true);
+					case "Valid Email Required":
+						return setWarnEmail("Valid Email Required");
+					case "Warn Pwd":
+						return setWarnPwd(true);
+					case "Warn Confirm Pwd":
+						return setWarnConfirmpwd(true);
+					default:
+						setWarnEmail("Something Happend");
 				}
 			}
 		},

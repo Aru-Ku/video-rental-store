@@ -14,8 +14,8 @@
 }
 .topBar {
 	width: 95%;
-	height: 40px;
-	display: flex;	
+	height: 45px;
+	display: flex;
 	position: relative;
 	justify-content: space-between;
 }
@@ -63,7 +63,7 @@
 
 .moviesWrapper {
 	background: var(--input-bg);
-	height: 100%;
+	height: 87%;
 	padding: 0.6rem;
 	transition: padding 0.2s linear;
 	overflow-y: scroll;
@@ -101,7 +101,7 @@
 
 .thumbnail {
 	width: 110px;
-	height: 160px
+	height: 160px;
 }
 
 .movieContent {
@@ -246,6 +246,9 @@
 	}
 	.movieFlex:last-child {
 		margin-bottom: 100px;
+	}
+	.topBar {
+		height: 38px;
 	}
 	.movieData {
 		width: 100%;
